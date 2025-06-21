@@ -1,20 +1,11 @@
-import userData from '../fixtures/user-data.json'
-
 describe('Orange HRM Tests', () => {
 
-  const selectorsList = { 
-        usernameField: "[name='username']",
-        passwordField: "[name='password']",
-        loginBotton: "[type='submit']",
-        wrongcredentialAlert: "[role='alert']"
-
-  }
-
-  it.only('Login - Sucess', () => {
-    cy.visit('/auth/login')
-    cy.get(selectorsList.usernameField).type(userData.userSucess.username)
-    cy.get(selectorsList.passwordField).type(userData.userSucess.password)
-    cy.get(selectorsList.loginBotton).click()
+  it('Valid Login', () => {
+    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+    cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-input').type('Admin')
+    cy.get(':nth-child(3) > .oxd-input-group > :nth-child(2) > .oxd-input').type('admin123')
+    cy.get('.oxd-button').click()
+    cy.get(':nth-child(8) > .oxd-main-menu-item > .oxd-text').contains('Dashboard')
     cy.location('pathname').should('equal', '/web/index.php/dashboard/index')
     cy.get(':nth-child(8) > .oxd-main-menu-item > .oxd-text').click()
     cy.get(':nth-child(6) > .oxd-main-menu-item > .oxd-text').click()
@@ -47,12 +38,11 @@ describe('Orange HRM Tests', () => {
     cy.get(':nth-child(1) > .oxd-form > .oxd-form-actions > .oxd-button').click()
     cy.get('.oxd-text--toast-message').contains('Successfully Updated')
   })
-    it('Login - Fail', () => {
-    cy.visit('/auth/login')
-    cy.get(selectorsList.usernameField).type(userData.userFail.username)
-    cy.get(selectorsList.passwordField).type(userData.userFail.password)
-    cy.get(selectorsList.loginBotton).click()
-    cy.get(selectorsList.wrongcredentialAlert).click()
+    it('Login Fail', () => {
+    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+    cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-input').type('Admin')
+    cy.get(':nth-child(3) > .oxd-input-group > :nth-child(2) > .oxd-input').type('ad123')
+    cy.get('.oxd-button').click()
     cy.get('.oxd-alert-content> .oxd-text').contains('Invalid credentials')
   })
 })
