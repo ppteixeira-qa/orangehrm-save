@@ -7,7 +7,19 @@ describe('Orange HRM Tests', () => {
     passwordField: "[name='password']",
     loginButton: "[type='submit']",
     dashboardGrid: ".orangehrm-dashboard-grid",
-    wrongCredentialAlert: "[role='alert']"
+    wrongCredentialAlert: "[role='alert']",
+    myInfoButton: "[href='/web/index.php/pim/viewMyDetails']",
+    firstNameField: "[name='firstName']",
+    middleNameField: "[name='middleName']",
+    lastNameField: "[name='lastName']",
+    genericField: ".oxd-input--active",
+    genericYearField: ".oxd-calendar-selector-year-selected", 
+    genericMonthField: ".oxd-calendar-selector-month-selected", 
+    genericComboBox: ".oxd-select-text--arrow",
+    dateBirthField: "[placeholder='yyyy-dd-mm']",
+    genderField: ".--gender-grouped-field",
+    submitButton: ".--close",
+
   }
 
   it.only('Valid Login', () => {
@@ -17,36 +29,29 @@ describe('Orange HRM Tests', () => {
     cy.get(selectorsList.loginButton).click()
     cy.location('pathname').should('equal', '/web/index.php/dashboard/index')
     cy.get(selectorsList.dashboardGrid)
-    
-  //   cy.get(':nth-child(8) > .oxd-main-menu-item > .oxd-text').click()
-  //   cy.get(':nth-child(6) > .oxd-main-menu-item > .oxd-text').click()
-  //   cy.get('.--name-grouped-field > :nth-child(1) > :nth-child(2) > .oxd-input').clear().type('FirstNameTest')
-  //   cy.get(':nth-child(2) > :nth-child(2) > .oxd-input').clear().type('MiddleNameTest')
-  //   cy.get(':nth-child(3) > :nth-child(2) > .oxd-input').clear().type('LastNameTest')
-  //   cy.get(':nth-child(1) > :nth-child(1) > .oxd-input-group > :nth-child(2) > .oxd-input').clear().type('E001Test')
-  //   cy.get(':nth-child(3) > :nth-child(1) > :nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-input').clear().type('12Test')
-  //   cy.get(':nth-child(2) > :nth-child(1) > .oxd-input-group > :nth-child(2) > .oxd-input').clear().type('19062025')
-  //   cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-date-wrapper > .oxd-date-input > .oxd-icon').click()
-  //   cy.get('.oxd-calendar-selector-year-selected > .oxd-icon').click()
-  //   cy.contains('2024').scrollIntoView().click()
-  //   cy.get('.oxd-calendar-selector-month-selected > .oxd-icon').click()
-  //   cy.contains('August').scrollIntoView().click()
-  //   cy.get(':nth-child(28) > .oxd-calendar-date').click()
-  //   cy.get('.--close').click()
-  //   cy.get(':nth-child(5) > :nth-child(1) > :nth-child(1) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text > .oxd-select-text--after > .oxd-icon').click()
-  //   cy.contains('Portuguese').scrollIntoView().click()
-  //   cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text > .oxd-select-text--after > .oxd-icon').click()
-  //   cy.get(':nth-child(4) > span').click()
-  //   cy.get(':nth-child(1) > .oxd-input-group > :nth-child(2) > .oxd-date-wrapper > .oxd-date-input > .oxd-input').click()
-  //   cy.get('.oxd-calendar-selector-year-selected > .oxd-text').click()
-  //   cy.contains('2000').scrollIntoView().click()
-  //   cy.get('.oxd-calendar-selector-month-selected > .oxd-text').click()
-  //   cy.contains('April').scrollIntoView().click()
-  //   cy.get(':nth-child(9) > .oxd-calendar-date').click()
-  //   cy.get('.--close').click()
-  //   cy.get(':nth-child(2) > :nth-child(2) > .oxd-radio-wrapper > label > .oxd-radio-input').click()
-  //   cy.get(':nth-child(1) > .oxd-form > .oxd-form-actions > .oxd-button').click()
-  //   cy.get('.oxd-text--toast-message').contains('Successfully Updated')
+    cy.get(selectorsList.myInfoButton).click()
+    cy.get(selectorsList.firstNameField).clear().type('Nameteste')
+    cy.get(selectorsList.middleNameField).clear().type('Middleteste')
+    cy.get(selectorsList.lastNameField).clear().type('Lastteste')
+    cy.get(selectorsList.genericField).eq(3).clear().type('11111')
+    cy.get(selectorsList.genericField).eq(4).clear().type('1')
+    cy.get(selectorsList.genericField).eq(5).clear().type('23456')
+    cy.get(selectorsList.genericField).eq(6).click()
+    cy.get(selectorsList.genericYearField).click()
+    cy.contains('2024').scrollIntoView().click()
+    cy.get(selectorsList.genericMonthField).click()
+    cy.contains('August').scrollIntoView().click()
+    cy.get(':nth-child(28) > .oxd-calendar-date').click()
+    cy.get(selectorsList.submitButton).eq(0).click()
+    cy.get(selectorsList.genericComboBox).eq(0).click()
+    cy.contains('Japanese').scrollIntoView().click()
+    cy.get(selectorsList.genericComboBox).eq(1).click()
+    cy.contains('Single').scrollIntoView().click()
+    cy.get(selectorsList.dateBirthField).eq(1).clear().type('1999-09-30')
+    cy.get(selectorsList.submitButton).eq(0).click()
+    cy.get(selectorsList.genderField).contains('Female').click()
+    cy.get('.orangehrm-left-space').eq(0).click()
+    cy.contains('Successfully Updated')
   })
     it('Login Fail', () => {
        cy.visit('/auth/login')
