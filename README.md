@@ -4,6 +4,10 @@ Automação de testes end-to-end usando Cypress para validação de funcionalida
 
 ---
 
+:eyes: Este projeto foi criado para fins educacionais. :eyes:
+
+---
+
 ## 📌 Descrição
 
 Este projeto tem como objetivo automatizar cenários funcionais do OrangeHRM utilizando Cypress uma ferramenta de testes de interface para aplicações web.
