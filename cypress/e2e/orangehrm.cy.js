@@ -19,12 +19,12 @@ describe('Orange HRM Tests', () => {
     DashPage.checkDashboardPage()
 
     myInfoPage.accessMyInfo()
-    myInfoPage.fillProfile('First Name', 'Middle Name', 'Last Name', '11111', '02', '2024-05-30')
-    myInfoPage.fillDates('2011-04-26','1999-01-16')
+    myInfoPage.fillProfile('Women', 'In', 'Tech', '12345', '02', '2022-08-30')
+    myInfoPage.fillDates('2010-10-15','1995-06-16')
     myInfoPage.saveForm()
    })
 
-  it.only('Login Fail', () => {
+  it('Login Fail', () => {
     loginFailPage.accessLoginPage()
     loginFailPage.loginFailUser('AdMIN', "321admin")
   })
